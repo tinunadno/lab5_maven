@@ -40,8 +40,12 @@ public class JsonToLabWork{
 			ArrayList<LabWork> labWorks=new ArrayList();
 			while(i.hasNext()){
 				JSONObject temp=(JSONObject)i.next();
-				LabWork lw=convertJsonToLabWork(temp);
-				labWorks.add(lw);
+				try {
+					LabWork lw = convertJsonToLabWork(temp);
+					labWorks.add(lw);
+				}catch(NullPointerException e){
+					System.out.println("This LabWork instance has incorrect structure:\n"+temp.toString().replaceAll(",", "\n"));
+				}
 			}
 			return labWorks;
 		}catch(NullPointerException e){
